@@ -1,7 +1,7 @@
 public class Solution {
     public int removeDuplicates(int[] A) {
         if(A == null) return 0;
-        if(A.length == 1) return 1;
+        if(A.length <= 1) return A.length;
         int i = 0, j = 1;
         while(j < A.length) {
             if(A[j] != A[i]) {
@@ -13,6 +13,7 @@ public class Solution {
             j++;
         }
         return i + 1;
+        
         /**
          * test
          * 
@@ -21,6 +22,7 @@ public class Solution {
          * 3. [1 1 2]
          * 4. [1 2 1] invalid input
          * 5. [1 2 2]
+         * 6. []
          */
     }
 }
