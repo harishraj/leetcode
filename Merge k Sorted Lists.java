@@ -16,29 +16,28 @@ import java.util.Iterator;
 public class Solution {
     public ListNode mergeKLists(List<ListNode> lists) {
         /**
-         * O(kn)
+         * O(k*n)
          */
          ListNode dummy = new ListNode(-1);
          ListNode cursor = dummy;
          
-         //remove nulls from lists
-         Iterator iterator = lists.iterator();
-         while(iterator.hasNext()) {
-             ListNode node = (ListNode)iterator.next();
-             if(node == null) iterator.remove();
-         }
-         
-         while(!lists.isEmpty()) {
-             int minIndex = 0;
-             for(int i = 1; i < lists.size(); i++) {
-                 if(lists.get(i).val < lists.get(minIndex).val) minIndex = i;
+         while(true) {
+             int minIndex = -1;
+             for(int i = 0; i < lists.size(); i++) {
+                 ListNode n = lists.get(i);
+                 if(n != null) {
+                     if(minIndex == -1 || lists.get(minIndex).val > n.val) minIndex = i;
+                 }
              }
-             ListNode node = lists.get(minIndex);
-             if(node.next == null) lists.remove(minIndex);
-             else lists.set(minIndex, node.next);
-             node.next = null;
-             cursor.next = node;
+             if(minIndex == -1) break;
+             cursor.next = lists.get(minIndex);
              cursor = cursor.next;
+             if(cursor.next != null) {
+                 lists.set(minIndex, cursor.next);
+             } else {
+                 lists.remove(minIndex);
+             }
+             cursor.next = null;
          }
          
          return dummy.next;
