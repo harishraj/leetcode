@@ -10,36 +10,46 @@
  * }
  */
  
-import java.util.List;
-import java.util.Iterator;
+import java.util.*;
 
 public class Solution {
     public ListNode mergeKLists(List<ListNode> lists) {
         /**
-         * O(k*n)
+         * O(klog(k)*n)
          */
-         ListNode dummy = new ListNode(-1);
-         ListNode cursor = dummy;
-         
-         while(true) {
-             int minIndex = -1;
-             for(int i = 0; i < lists.size(); i++) {
-                 ListNode n = lists.get(i);
-                 if(n != null) {
-                     if(minIndex == -1 || lists.get(minIndex).val > n.val) minIndex = i;
-                 }
-             }
-             if(minIndex == -1) break;
-             cursor.next = lists.get(minIndex);
-             cursor = cursor.next;
-             if(cursor.next != null) {
-                 lists.set(minIndex, cursor.next);
-             } else {
-                 lists.remove(minIndex);
-             }
-             cursor.next = null;
+         if(lists == null || lists.isEmpty()) return null;
+         ArrayDeque<ListNode> q = new ArrayDeque<ListNode>();
+         for(ListNode n : lists) {
+             if (n != null) q.offer(n);
+         }
+         while(q.size() > 1) {
+             ListNode a = q.poll();
+             ListNode b = q.poll();
+             q.offer(merge2Lists(a, b));
          }
          
-         return dummy.next;
+         return q.poll();
+    }
+    
+    private ListNode merge2Lists(ListNode a, ListNode b) {
+        ListNode dummy = new ListNode(-1);
+        ListNode cursor = dummy;
+        while(a!=null && b!=null) {
+            ListNode n = null;
+            if(a.val <= b.val) {
+                n = a;
+                a = a.next;
+            } else {
+                n = b;
+                b = b.next;
+            }
+            n.next = null;
+            cursor.next = n;
+            cursor = cursor.next;
+        }
+        if(a != null) cursor.next = a;
+        if(b != null) cursor.next = b;
+        
+        return dummy.next;
     }
 }
