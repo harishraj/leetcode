@@ -13,11 +13,13 @@ public class Solution {
          * if root==null:
          *  return
          * l=root.left
+         * root.left = null
          * f(l)
          * r=root.right
+         * root.right = null
          * f(r)
          * if l!=null:
-         *  root.r=l
+         *  root.right=l
          * c=root
          * while c.right!=null:
          *  c=c.right
@@ -25,15 +27,14 @@ public class Solution {
          */
          
          if(root==null) return;
-         TreeNode l = root.left;
-         TreeNode r = root.right;
+         TreeNode l = root.left, r = root.right;
+         root.left = null;
+         root.right = null;
          flatten(l);
          flatten(r);
-         if(l != null) {
-             root.right = l;
-         }
+         if(l != null) root.right = l;
          TreeNode c = root;
-         while(c.right != null) c = c.right;
+         while(c.right != null) c = c.right; //O(n)
          c.right = r;
     }
 }
