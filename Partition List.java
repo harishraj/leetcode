@@ -18,15 +18,16 @@ public class Solution {
          * cur=head
          * while cur not null:
          *  n=cur
-         *  cur=cur.next
-         *  n.next=null
          *  if cur.val < x:
+         *      cur=cur.next
+         *      n.next=null
          *      cur1.next=n
          *      cur1=cur1.next
          *  else:
+         *      cur=cur.next
+         *      n.next=null
          *      cur2.next=n
          *      cur2=cur2.next
-         *  cur=cur.next
          * cur1.next=dm2.next
          * return dm1.next
          */
@@ -37,16 +38,17 @@ public class Solution {
          
          while(c!=null) {
              ListNode n = c;
-             c = c.next;
-             n.next = null;
              if(c.val < x) {
+                 c = c.next;
+                 n.next = null;
                  c1.next=n;
                  c1=c1.next;
              } else {
+                 c = c.next;
+                 n.next = null;
                  c2.next=n;
                  c2=c2.next;
              }
-             c=c.next;
          }
          c1.next=dm2.next;
          return dm1.next;
