@@ -26,6 +26,9 @@ public class Solution {
          *          c1.next=c2
          *          c1=c1.next
          *      c2=c3
+         * if !c2IsDup:
+         *  c1.next = c2
+         *  c1=c1.next
          * c1.next=null
          * return dm.next;
          */
@@ -34,9 +37,10 @@ public class Solution {
          ListNode dm = new ListNode(-1);
          dm.next = head;
          ListNode c1 = dm, c2 = head, c3 = head;
+         
+         boolean c2IsDup = false;
          while(c3.next != null) {
              c3 = c3.next;
-             boolean c2IsDup = false;
              if(c3.val == c2.val) {
                  c2IsDup = true;
              } else {
@@ -47,6 +51,10 @@ public class Solution {
                  }
                  c2 = c3;
              }
+         }
+         if(!c2IsDup) {
+             c1.next = c2;
+             c1 = c1.next;
          }
          c1.next = null;
          return dm.next;
