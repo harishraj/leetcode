@@ -56,7 +56,7 @@ public class Solution {
         ArrayList<Integer> arr = new ArrayList<Integer>();
         ListNode c = head;
         while(c!=null) {
-            arr.append(c.val);
+            arr.add(c.val);
             c = c.next;
         }
         return arrToBst(arr, 0, arr.size());
