@@ -74,6 +74,7 @@ public class Solution {
                         c2=c2.next
                         
                     c1,c2=c3,c3
+                    c3=null
                     
                 p *= 2
                 head=dm.next
@@ -83,67 +84,64 @@ public class Solution {
         */
         
         int len = 0;
-        ListNode c = head;
-        while (c!=null) {
-            c=c.next;
-            len++;
-        }
+        ListNode c;
+        for (c=head; c!=null; c=c.next) len++;
         
-        int p = 1;
         ListNode dm = new ListNode(-1);
-        while(p<len) {
+        for (int p=1; p<=len; p*=2) {
+            dm.next = null;
             c = dm;
+            
             ListNode c1=head, c2=head, c3=null;
-            while(c2!=null) {
+            while(c1 != null) {
+                c3 = null;
                 for(int i=0; i<p-1; i++){
-                    if(c2!=null) c2=c2.next;
+                    if(c2 != null) c2 = c2.next;
                     else break;
                 }
-                if (c2!=null) {
+                if (c2 != null) {
                     ListNode tmp = c2;
                     c2=c2.next;
                     tmp.next=null;
                     
-                    c3=c2;
+                    c3 = c2;
                     for(int i=0; i<p-1; i++) {
-                        if(c3!=null) c3=c3.next;
+                        if(c3 != null) c3 = c3.next;
                         else break;
                     }
-                    if (c3!=null) {
-                        tmp=c3;
-                        c3=c3.next;
-                        tmp.next=null;
+                    if (c3 != null) {
+                        tmp = c3;
+                        c3 = c3.next;
+                        tmp.next = null;
                     }
                 }
                 
-                while(c1!=null && c2!=null) {
+                while(c1 != null && c2 != null) {
                     if(c1.val <= c2.val){
-                        c.next=c1;
-                        c=c.next;
-                        c1=c1.next;
+                        c.next = c1;
+                        c = c.next;
+                        c1 = c1.next;
                     } else {
-                        c.next=c2;
-                        c=c.next;
-                        c2=c2.next;
+                        c.next = c2;
+                        c = c.next;
+                        c2 = c2.next;
                     }
                 }
-                while(c1!=null) {
-                    c.next=c1;
-                    c=c.next;
-                    c1=c1.next;
+                while(c1 != null) {
+                    c.next = c1;
+                    c = c.next;
+                    c1 = c1.next;
                 }
-                while(c2!=null) {
-                    c.next=c2;
-                    c=c.next;
-                    c2=c2.next;
+                while(c2 != null) {
+                    c.next = c2;
+                    c = c.next;
+                    c2 = c2.next;
                 }
                 
-                c1=c3;
-                c2=c3;
+                c1 = c3;
+                c2 = c3;
             }
-            p *= 2;
             head = dm.next;
-            dm.next=null;
         }
         return dm.next;
     }
