@@ -18,7 +18,8 @@ public class Solution {
                 cur=old_next
             cur=head
             while cur!=null:
-                cur.next.random=cur.random.next
+                if cur.random!=null:
+                    cur.next.random=cur.random.next
                 cur=cur.next.next
             cur=head
             if head==null:
@@ -27,7 +28,7 @@ public class Solution {
             while cur!=null:
                 node=cur.next
                 cur.next=cur.next.next
-                if node!=null:
+                if node!=null and node.next!=null:
                     node.next=node.next.next
                 cur=cur.next
             return new_head
@@ -42,7 +43,8 @@ public class Solution {
         }
         cur = head;
         while(cur != null) {
-            cur.next.random = cur.random.next;
+            if(cur.random != null)
+                cur.next.random = cur.random.next;
             cur = cur.next.next;
         }
         cur = head;
