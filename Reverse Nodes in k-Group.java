@@ -23,7 +23,7 @@ public class Solution {
                 while c1!=null and l<k-1:
                     c1=c1.next
                     l++
-                if l==k-1:
+                if l==k-1 and c1!=null:
                     segTail=c1
                     c1=c1.next
                     segTail.next=null
@@ -52,7 +52,7 @@ public class Solution {
                 c1 = c1.next;
                 l++;
             }
-            if (l == k-1) {
+            if (l == k-1 && c1 != null) {
                 ListNode segTail = c1;
                 c1 = c1.next;
                 segTail.next = null;
