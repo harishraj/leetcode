@@ -13,7 +13,7 @@ public class Solution {
         StringBuilder sb = new StringBuilder(String.valueOf(y));
         sb.reverse();
         y = sign * Long.valueOf(sb.toString());
-        y = y < 0xffffffff ? 0xffffffff : y;
+        y = y < 0x80000000 ? 0x80000000 : y;
         y = y > 0x7fffffff ? 0x7fffffff : y;
         return (int)y;
     }
