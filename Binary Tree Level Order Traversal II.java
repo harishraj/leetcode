@@ -11,7 +11,7 @@ import java.util.*;
 public class Solution {
     public List<List<Integer>> levelOrderBottom(TreeNode root) {
         List<List<Integer>> r = new LinkedList<List<Integer>>();
-        ArrayDeque<Integer> q = new ArrayDeque<Integer>();
+        ArrayDeque<TreeNode> q = new ArrayDeque<TreeNode>();
         if(root==null) return r;
         q.offer(root);
         while(!q.isEmpty()) {
@@ -23,7 +23,7 @@ public class Solution {
                 if(n.left!=null) q.offer(n.left);
                 if(n.right!=null) q.offer(n.right);
             }
-            r.addFirst(level);
+            r.add(0, level);
         }
         return r;
     }
