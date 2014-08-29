@@ -30,6 +30,7 @@ public class Solution {
         ArrayDeque<TreeNode> stack = new ArrayDeque<TreeNode>();
         List<Integer> list = new ArrayList<Integer>();
         if(root==null) return list;
+        stack.push(root);
         TreeNode lastAddedNode = null;
         while(!stack.isEmpty()) {
             TreeNode node = stack.pop();
