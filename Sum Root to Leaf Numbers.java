@@ -46,7 +46,7 @@ public class Solution {
             }
             if(node.right!=null) {
                 node.right.val += 10*node.val;
-                stack.push(root.right);
+                stack.push(node.right);
             }
             if(node.left==null && node.right==null) sum+=node.val;
         }
