@@ -12,7 +12,7 @@ import java.util.*;
 
 public class Solution {
     public List<List<Integer>> levelOrder(TreeNode root) {
-        List<List<Integer>> r = new ArrayList<ArrayList<Integer>>();
+        List<List<Integer>> r = new ArrayList<List<Integer>>();
         ArrayDeque<TreeNode> q = new ArrayDeque<TreeNode>();
         if(root==null) return r;
         q.offer(root);
