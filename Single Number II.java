@@ -5,7 +5,7 @@ public class Solution {
             int n = A[i];
             int b = 0;
             while(n != 0) {
-                if(n & 1 != 0) {
+                if((n & 1) != 0) {
                     bitCount[b]++;
                     bitCount[b] %= 3;
                 }
@@ -16,7 +16,7 @@ public class Solution {
         int r=0;
         for(int i=0; i<32; i++) {
             if(bitCount[i] != 0) {
-                r |= 1 << i;
+                r |= (1 << i);
             }
         }
         return r;
