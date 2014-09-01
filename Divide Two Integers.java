@@ -21,13 +21,13 @@ public class Solution {
         */
         if(divisor==0) throw new IllegalArgumentException();
         int sign = ((dividend>0 && divisor<0) || (dividend<0 && divisor>0))? -1:1;
-        int dd = Math.abs(dividend);
-        int dr = Math.abs(divisor);
+        long dd = Math.abs((long)dividend);
+        long dr = Math.abs((long)divisor);
         
-        int r = 0;
+        long r = 0;
         while (dd>=dr) {
-            int bp = 1;
-            int tmp = dr;
+            long bp = 1;
+            long tmp = dr;
             while((tmp<<1)>0 && dd>(tmp<<1)) {
                 tmp <<= 1;
                 bp<<=1;
@@ -35,6 +35,6 @@ public class Solution {
             dd-=tmp;
             r+=bp;
         }
-        return r*sign;
+        return (int)(r*sign);
     }
 }
