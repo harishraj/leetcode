@@ -9,7 +9,8 @@ public class Solution {
         if(map.containsKey(n)) return map.get(n);
         int r = 0;
         for(int i=0; i<n; i++) {
-            r += map.get(numTrees0(i, map)) * map.get(numTrees0(n - 1 - i, map));
+            
+            r += numTrees0(i, map) * numTrees0(n - 1 - i, map);
         }
         map.put(n, r);
         return r;
