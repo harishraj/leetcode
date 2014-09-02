@@ -11,8 +11,8 @@ public class Solution {
                 int k = Arrays.binarySearch(num, j+1, num.length, t);
                 if(k>=0) return target;
                 else {
-                    if(Math.abs(target-num[~k]) < Math.abs(diff)) diff = target-num[~k];
-                    if((~k)!=0 && Math.abs(target-num[(~k)-1]) < Math.abs(diff)) diff = target - num[(~k)-1];
+                    if((~k)<num.length && Math.abs(target-num[~k]) < Math.abs(diff)) diff = target-num[~k];
+                    if((~k)>0 && (~k)<=num.length && Math.abs(target-num[(~k)-1]) < Math.abs(diff)) diff = target - num[(~k)-1];
                 }
             }
         }
