@@ -25,6 +25,7 @@ public class Solution {
         */
         
         if(j <= i) return -1;
+        if(j == i+1 && A[i]==t) return i;
         int mid = (i + j) / 2;
         if(A[mid] > A[i]) {
             if(A[i]<=t && t<A[mid]) return search0(A, i, mid, t);
