@@ -47,6 +47,7 @@ public class Solution {
             
             return r
         */
+        if(node==null) return null;
         ArrayDeque<UndirectedGraphNode> q = new ArrayDeque<UndirectedGraphNode>();
         HashSet<UndirectedGraphNode> visited = new HashSet<UndirectedGraphNode>();
         q.offer(node);
