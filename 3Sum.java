@@ -14,31 +14,29 @@ public class Solution {
             time O(n^2) space O(n^2)
         */
         Arrays.sort(num);
-        HashMap<Integer,HashSet<Long>> dict = new HashMap<Integer,HashSet<Long>>();
+        HashMap<Integer,HashSet<Integer>> dict = new HashMap<Integer,HashSet<Integer>>();
         HashSet<List<Integer>> set = new HashSet<List<Integer>>();
         for(int i=0; i<num.length; i++) {
             for(int j=i+1; j<num.length; j++) {
-                int k = num[i] + num[j];
-                HashSet<Long> vs = dict.containsKey(k) ? dict.get(k) : new HashSet<Long>();
-                vs.add((((long)num[i])<<32) + (long)num[j]);
-                dict.put(k, vs);
+                int key = num[i] + num[j];
+                HashSet<Integer> vs = dict.containsKey(key) ? dict.get(key) : new HashSet<Integer>();
+                assert i<(1<<16) && j<(1<<16);
+                vs.add((i<<16)+j);
+                dict.put(key, vs);
             }
         }
-        for(int i = 0; i < num.length; i++) {
-            int n = num[i];
-            if(dict.containsKey(-n)) {
-                for(Long v : dict.get(-n)) {
-                    List<Integer> tl = new ArrayList<Integer>();
-                    int a = (int)(v>>>32);
-                    int b = (int)(v&0x00000000ffffffff);
-                    if(n<=a){
-                        tl.add(n); tl.add(a); tl.add(b);
-                    }else if(a<n && n<b) {
-                        tl.add(a); tl.add(n); tl.add(b);
-                    }else {
-                        tl.add(a); tl.add(b); tl.add(n);
+        for(int k = 0; k < num.length; k++) {
+            if(dict.containsKey(-num[k])) {
+                for(Integer indices : dict.get(-num[k])) {
+                    int i = indices>>16;
+                    int j = indices&0x0000ffff;
+                    if(k > j) {
+                        List<Integer> tl = new ArrayList<Integer>();
+                        tl.add(num[i]);
+                        tl.add(num[j]);
+                        tl.add(num[k]);
+                        set.add(tl);
                     }
-                    set.add(tl);
                 }
             }
         }
