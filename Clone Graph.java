@@ -53,11 +53,11 @@ public class Solution {
         q.offer(node);
         while(!q.isEmpty()) {
             UndirectedGraphNode n = q.poll();
-            n.neighbors.add(new UndirectedGraphNode(n.label));
+            UndirectedGraphNode newn = new UndirectedGraphNode(n.label);
+            n.neighbors.add(newn);
             visited.add(n);
-            for(int i=0; i<n.neighbors.size()-1; i++) {
-                UndirectedGraphNode nn = n.neighbors.get(i);
-                if(!visited.contains(nn)) q.offer(nn);
+            for(UndirectedGraphNode nn : n.neighbors) {
+                if(nn != newn && !visited.contains(nn)) q.offer(nn);
             }
         }
         
@@ -66,10 +66,12 @@ public class Solution {
         while(!q.isEmpty()) {
             UndirectedGraphNode n = q.poll();
             visited.add(n);
-            for(int i=0; i<n.neighbors.size()-1; i++) {
-                UndirectedGraphNode nn = n.neighbors.get(i);
-                if(!visited.contains(nn)) q.offer(nn);
-                n.neighbors.get(n.neighbors.size()-1).neighbors.add(nn.neighbors.get(nn.neighbors.size()-1));
+            UndirectedGraphNode newn = n.neighbors.get(n.neighbors.size()-1);
+            for(UndirectedGraphNode nn : n.neighbors) {
+                if(nn != newn) {
+                    if(!visited.contains(nn)) q.offer(nn);
+                    newn.neighbors.add(nn.neighbors.get(nn.neighbors.size()-1));
+                }
             }
         }
         
