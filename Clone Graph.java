@@ -17,21 +17,21 @@ public class Solution {
             q.offer node
             while q not empty:
                 n=q.poll
-                for nn in n.neighbors:
-                    if not visited.contains nn:
-                        q.offer nn
                 n.neighbors.add new UndirectedGraphNode(n.label)
                 visited.add n
+                for nn in n.neighbors not including the last one:
+                    if not visited.contains nn:
+                        q.offer nn
             
             visited.clear
             q.offer node
             while q not empty:
                 n=q.poll
-                for nn in n.neighbors:
+                visited.add n
+                for nn in n.neighbors not including the last one:
                     if not visited.contains nn:
                         q.offer nn
                     n.neighbors.last.neighbors.add(nn.neighbors.last)
-                visited.add n
             
             r = node.neighbors.last
             
@@ -39,11 +39,11 @@ public class Solution {
             q.offer node
             while q not empty:
                 n=q.poll
+                n.neigbors.removeLast
+                visited.add n
                 for nn in n.neighbors:
                     if not visited.contains nn:
                         q.offer nn
-                n.neigbors.removeLast
-                visited.add n
             
             return r
         */
@@ -53,22 +53,24 @@ public class Solution {
         q.offer(node);
         while(!q.isEmpty()) {
             UndirectedGraphNode n = q.poll();
-            for(UndirectedGraphNode nn : n.neighbors) {
-                if(!visited.contains(nn)) q.offer(nn);
-            }
             n.neighbors.add(new UndirectedGraphNode(n.label));
             visited.add(n);
+            for(int i=0; i<n.neighbors.size()-1; i++) {
+                UndirectedGraphNode nn = n.neighbors.get(i);
+                if(!visited.contains(nn)) q.offer(nn);
+            }
         }
         
         visited.clear();
         q.offer(node);
         while(!q.isEmpty()) {
             UndirectedGraphNode n = q.poll();
-            for(UndirectedGraphNode nn : n.neighbors) {
+            visited.add(n);
+            for(int i=0; i<n.neighbors.size()-1; i++) {
+                UndirectedGraphNode nn = n.neighbors.get(i);
                 if(!visited.contains(nn)) q.offer(nn);
                 n.neighbors.get(n.neighbors.size()-1).neighbors.add(nn.neighbors.get(nn.neighbors.size()-1));
             }
-            visited.add(n);
         }
         
         UndirectedGraphNode r = node.neighbors.get(node.neighbors.size()-1);
@@ -77,11 +79,11 @@ public class Solution {
         q.offer(node);
         while(!q.isEmpty()) {
             UndirectedGraphNode n = q.poll();
+            n.neighbors.remove(n.neighbors.size()-1);
+            visited.add(n);
             for(UndirectedGraphNode nn : n.neighbors) {
                 if(!visited.contains(nn)) q.offer(nn);
             }
-            n.neighbors.remove(n.neighbors.size()-1);
-            visited.add(n);
         }
         
         return r;
