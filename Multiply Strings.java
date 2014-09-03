@@ -21,7 +21,9 @@ public class Solution {
             for(int j=0; j<num2.length()-1-i; j++) p.append("0");
             prod = add(prod, p);
         }
-        return prod.toString();
+        String r = prod.toString();
+        if(r.length()>0 && r.charAt(0)=='0') return "0";
+        return r;
     }
     private StringBuilder multiply0(String s, char a) {
         StringBuilder r = new StringBuilder();
