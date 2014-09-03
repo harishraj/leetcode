@@ -43,6 +43,7 @@ public class Solution {
         b.reverse();
         String sa = a.toString();
         String sb = b.toString();
+        if(sb.equals("")) return a;
         if(sa.length()<sb.length()) return add(b, a);
         int i = 0, j = 0;
         while(j < sb.length()) {
