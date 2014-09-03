@@ -36,7 +36,7 @@ public class Solution {
                             c.right.val+=c.val
                         c=c.right
         */
-        ArrayDeque<TreeNode> s = new ArrayDeque<TreeNode>();
+        LinkedList<TreeNode> s = new LinkedList<TreeNode>();
         TreeNode c = root;
         TreeNode last = null;
         List<List<Integer>> r = new ArrayList<List<Integer>>();
@@ -45,7 +45,8 @@ public class Solution {
                 s.push(c);
                 if(c.left==null && c.right==null && c.val==sum) {
                     List<Integer> r1 = new ArrayList<Integer>();
-                    for(TreeNode n:s) r1.add(n.val);
+                    for(int i=s.size()-1; i>=0; i--) r1.add(s.get(i).val);
+                    for(int i=r1.size()-1; i>0; i--) r1.set(i, r1.get(i) - r1.get(i-1));
                     r.add(r1);
                 }
                 if (c.left!=null) c.left.val += c.val;
@@ -61,7 +62,8 @@ public class Solution {
                     s.push(c);
                     if(c.left==null && c.right==null && c.val==sum) {
                         List<Integer> r1 = new ArrayList<Integer>();
-                        for(TreeNode n:s) r1.add(n.val);
+                        for(int i=s.size()-1; i>=0; i--) r1.add(s.get(i).val);
+                        for(int i=r1.size()-1; i>0; i--) r1.set(i, r1.get(i) - r1.get(i-1));
                         r.add(r1);
                     }
                     if(c.right!=null) c.right.val += c.val;
