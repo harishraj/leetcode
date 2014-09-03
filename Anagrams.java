@@ -10,9 +10,9 @@ public class Solution {
         }
         List<String> r = new ArrayList<String>();
         for(String k : map.keySet()) {
-            if(map.get(k).size()>r.size()) r = map.get(k);
+            if(map.get(k).size()>1) r.addAll(map.get(k));
         }
-        return r.size()>1?r:new ArrayList<String>();
+        return r;
     }
     
     private String sort(String s) {
