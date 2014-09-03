@@ -8,7 +8,6 @@ public class Solution {
              boolean match = true;
              for(int j=0; j<n.length(); j++) {
                  if(h.charAt(i+j)!=n.charAt(j)){
-                     i+=j;
                      match=false;
                      break;
                  }
