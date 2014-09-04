@@ -1,3 +1,5 @@
+import java.util.ArrayDeque;
+
 public class Solution {
     public String simplifyPath(String path) {
         /*
@@ -15,7 +17,9 @@ public class Solution {
         ArrayDeque<String> stack = new ArrayDeque<String>();
         for(int i=0; i< ns.length; i++) {
             if(ns[i].equals("") || ns[i].equals(".")) ;
-            else if(ns[i].equals("..") && !stack.isEmpty()) stack.pop();
+            else if(ns[i].equals("..")) {
+                if(!stack.isEmpty()) stack.pop();
+            }
             else stack.push(ns[i]);
         }
         if(stack.isEmpty()) return "/";
