@@ -1,7 +1,7 @@
 import java.util.*;
 public class Solution {
     public List<Integer> spiralOrder(int[][] matrix) {
-        if(matrix==null) return new ArrayList<Integer>();
+        if(matrix==null || matrix.length==0 || matrix[0].length==0) return new ArrayList<Integer>();
         return spiral(matrix, 0, 0, matrix.length-1, matrix[0].length-1);
     }
     private List<Integer> spiral(int[][] mtx, int a, int b, int c, int d) {
