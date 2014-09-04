@@ -14,7 +14,7 @@ public class Solution {
             if str[0] is - or + remove it
             if str is "" or "." false
             if not all chars are in [0..9.] false
-            if str[0]=='0'&&str[1]!='.': false
+            //if str[0]=='0'&&str[1]!='.': false
         */
         if(s==null) return false;
         s = s.trim();
@@ -33,6 +33,7 @@ public class Solution {
         if(ecnt==0) return check(s);
         else {
             String[] sa = s.split("e");
+            if(sa.length<=1) return false;
             for(int i=0; i<sa[1].length(); i++) if(sa[1].charAt(i)=='.') return false;
             return check(sa[0]) && check(sa[1]);
         }
@@ -52,7 +53,7 @@ public class Solution {
         for(int i=0; i<s.length(); i++) {
             if(!set.contains(s.charAt(i))) return false;
         }
-        if(s.length()>1 && s.charAt(0)=='0' && s.charAt(1)!='.') return false;
+        //if(s.length()>1 && s.charAt(0)=='0' && s.charAt(1)!='.') return false;
         return true;
     }
 }
