@@ -21,9 +21,10 @@ public class Solution {
             }
         }
         if(str.length()>10) str = str.substring(str.length()-10);
+        if(str.equals("")) return 0;
         long v = Long.valueOf(str);
         if(sign>0 && v>=0x7fffffff) return 0x7fffffff;
         else if(sign<0 && v>=0x0000000080000000L) return 0x80000000;
-        else return (int)v;
+        else return ((int)v)*sign;
     }
 }
