@@ -20,7 +20,7 @@ public class Solution {
                 break;
             }
         }
-        if(str.length()>10) str = str.substring(str.length()-10);
+        if(str.length()>11) str = str.substring(str.length()-11);
         if(str.equals("")) return 0;
         long v = Long.valueOf(str);
         if(sign>0 && v>=0x7fffffff) return 0x7fffffff;
