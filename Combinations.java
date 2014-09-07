@@ -19,7 +19,7 @@ public class Solution {
         }
         for(int n: set) {
             HashSet<Integer> set1 = new HashSet<Integer>(set);
-            set.remove(n);
+            set1.remove(n);
             for(List<Integer> r : combine0(set1, k-1)) {
                 r.add(n);
                 result.add(r);
