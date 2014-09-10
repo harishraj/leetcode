@@ -1,3 +1,4 @@
+import java.util.*;
 public class Solution {
     public List<String> restoreIpAddresses(String s) {
         /*
@@ -50,6 +51,7 @@ public class Solution {
         if(s.length()==0) return false;
         if(s.length()==1) return true;
         if(s.charAt(0)=='0') return false;
+        if(s.length()>3) return false;
         int v= Integer.valueOf(s);
         return 10<=v && v<=255;
     }
