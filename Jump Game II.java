@@ -22,7 +22,7 @@ public class Solution {
             else {
                 int minJump = 0x7fffffff;
                 for(int j=1; j<=A[i]; j++) {
-                    if(i+j<A.length && dp[i+j]+1<minJump) minJump=dp[i+j]+1;
+                    if(i+j<A.length && dp[i+j]!=0x7fffffff && dp[i+j]+1<minJump) minJump=dp[i+j]+1;
                 }
                 dp[i]=minJump;
             }
