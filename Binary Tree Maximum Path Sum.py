@@ -11,8 +11,17 @@ class Solution:
     def maxPathSum(self, root):
         if root is None:
             return 0
-        return max(self.maxPathSum(root.left), self.maxPathSum(root.right), max(0, self.f(root.left)) + max(0, self.f(root.right)) + root.val)
-    def f(self, root):
+        dp={}
+        return max(
+            self.maxPathSum(root.left), 
+            self.maxPathSum(root.right), 
+            max(0, self.f(root.left, dp)) + max(0, self.f(root.right, dp)) + root.val
+        )
+    def f(self, root, dp):
         if root is None:
             return 0
-        return root.val + max(0, self.f(root.right), self.f(root.left))
+        if dp.__contains__(root):
+            return dp[root]
+        rv = root.val + max(0, self.f(root.right, dp), self.f(root.left, dp))
+        dp[root] = rv
+        return rv
