@@ -9,19 +9,24 @@ class Solution:
     # @param root, a tree node
     # @return an integer
     def maxPathSum(self, root):
+        dp1 = {}
+        dp2 = {}
+        return self.f(root, dp1, dp2)
+    def f(self, root, dp1, dp2):
         if root is None:
             return 0
-        dp={}
-        return max(
-            self.maxPathSum(root.left), 
-            self.maxPathSum(root.right), 
-            max(0, self.f(root.left, dp)) + max(0, self.f(root.right, dp)) + root.val
+        if dp1.__contains__(root):
+            return dp1[root]
+        dp1[root] = max(
+            self.f(root.left, dp1, dp2),
+            self.f(root.right,dp1, dp2),
+            max(0, self.g(root.left, dp2)) + max(0, self.g(root.right, dp2)) + root.val
         )
-    def f(self, root, dp):
+        return dp1[root]
+    def g(self, root, dp2):
         if root is None:
             return 0
-        if dp.__contains__(root):
-            return dp[root]
-        rv = root.val + max(0, self.f(root.right, dp), self.f(root.left, dp))
-        dp[root] = rv
-        return rv
+        if dp2.__contains__(root):
+            return dp2[root]
+        dp2[root] = root.val + max(0, self.g(root.left, dp2), self.g(root.right, dp2))
+        return dp2[root]
