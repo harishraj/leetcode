@@ -9,31 +9,61 @@
 public class Solution {
     public void connect(TreeLinkNode root) {
         /*
-            if root==null:
-                return
-            l=root.left
-            r=root.right
-            connect(l)
-            connect(r)
-            while l!=null && r!=null:
-                l.next=r
-                if l.right!=null:
-                    l=l.right
-                else:
-                    l=l.left
-                if r.left!=null:
-                    r=r.left
-                else:
-                    r=r.right
+            def connect(self, root):
+                cur,head,prev=root,None,None
+                while cur:
+                    while cur:
+                        if cur.left:
+                            if prev:
+                                prev.next=cur.left
+                            else:
+                                head=cur.left
+                            prev=cur.left
+                        if cur.right:
+                            if prev:
+                                prev.next=cur.right
+                            else:
+                                head=cur.right
+                            prev=cur.right
+                        cur=cur.next
+                    cur=head
+                    head,prev=None,None
+            '''
+            def connect(self, root):
+                if not root:
+                    return
+                q=[root]
+                while q:
+                    size=len(q)
+                    prev=None
+                    for n in q[:size]:
+                        if n.left:
+                            q.append(n.left)
+                        if n.right:
+                            q.append(n.right)
+                        if prev:
+                            prev.next=n
+                        prev=n
+                    q=q[size:]'''
         */
-        if(root==null) return;
-        TreeLinkNode l=root.left, r=root.right;
-        connect(l);
-        connect(r);
-        while(l!=null && r!=null) {
-            l.next = r;
-            l=l.right!=null ? l.right:l.left;
-            r=r.left!=null? r.left:r.right;
+        TreeLinkNode cur=root, head=null, prev=null;
+        while(cur!=null) {
+            while(cur!=null) {
+                if(cur.left!=null) {
+                    if(prev!=null) prev.next = cur.left;
+                    else head = cur.left;
+                    prev=cur.left;
+                }
+                if(cur.right!=null) {
+                    if(prev!=null) prev.next = cur.right;
+                    else head = cur.right;
+                    prev=cur.right;
+                }
+                cur=cur.next;
+            }
+            cur=head;
+            head=null;
+            prev=null;
         }
     }
 }
